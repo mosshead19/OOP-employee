@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,36 +11,51 @@ namespace OOP_employee
         static void Main(string[] args)
         {
             RegularEmployee regEmployee = new RegularEmployee("Alice",1);
+            HourlyEmployee hourlyEmployee = new HourlyEmployee("Bob", 2, 160, 20.5f);
+            CommissionEmployee commissionEmployee = new CommissionEmployee("Charlie", 3, 50000, 0.10f);
+
             //instance of hourlyemployee
             //of commision employee
 
-            
-           regEmployee.CalculateSalary();
+
+            regEmployee.CalculateSalary();
+            hourlyEmployee.CalculateSalary();
+            commissionEmployee.CalculateSalary();
             //xEmployee.Caculate salary();
             //...
 
 
             Console.WriteLine("Employee Salaries(before bonus): ");
             Console.WriteLine($"Name: {regEmployee.name}, ID: {regEmployee.id}, Salary: {regEmployee.salary}");
+            Console.WriteLine($"Name: {hourlyEmployee.name}, ID: {hourlyEmployee.id}, Salary: {hourlyEmployee.salary}");
+            Console.WriteLine($"Name: {commissionEmployee.name}, ID: {commissionEmployee.id}, Salary: {commissionEmployee.salary}");
             //follow lang formatng prev line 
 
 
             //USE THE APPLY BONUS for each emplloyee here HERE
             regEmployee.applyBonus(4000.0f, 500f);
+            hourlyEmployee.applyBonus(4000.0f, 500f);
+            commissionEmployee.applyBonus(4000.0f, 500f);
 
 
 
             //Calculate ssalary again here 
-            regEmployee.CalculateSalary();
+
             //employee 2...
 
            Console.WriteLine();
 
             Console.WriteLine("Employee Salaries(after bonus): ");
             Console.WriteLine($"Name: {regEmployee.name}, ID: {regEmployee.id}, Salary: {regEmployee.salary}");
+            Console.WriteLine($"Name: {hourlyEmployee.name}, ID: {hourlyEmployee.id}, Salary: {hourlyEmployee.salary}");
+            Console.WriteLine($"Name: {commissionEmployee.name}, ID: {commissionEmployee.id}, Salary: {commissionEmployee.salary}");
 
             //for payroll ako na lng? or if you want
+            Console.WriteLine();
+            Console.WriteLine($"Total Payroll: {regEmployee.salary+hourlyEmployee.salary+commissionEmployee.salary}");
+
             Console.ReadKey();
+
         }
     }
 
@@ -102,10 +117,29 @@ namespace OOP_employee
             this.hourlyRate = hourlyRate;
         }
 
-        //Calculate SALARY wala pa here
-
-
+        public void CalculateSalary()
+        {
+            salary = hoursWorked * hourlyRate;
+        }
     }
 
     //commission employee
+    public class CommissionEmployee : Employee
+    {
+        public float SalesAmount { get; set; }
+        public float CommissionRate { get; set; }
+
+        public CommissionEmployee(string name, int id, float salesAmount,float commissionRate) : base(name, id)
+        {
+            
+            this.SalesAmount = salesAmount;
+            this.CommissionRate = commissionRate;
+
+        }
+
+        public void CalculateSalary()
+        {
+            salary = SalesAmount * CommissionRate;
+        }
+    }
 }
