@@ -35,15 +35,12 @@ namespace OOP_employee
             //USE THE APPLY BONUS for each emplloyee here HERE
             regEmployee.applyBonus(4000.0f, 500f);
             hourlyEmployee.applyBonus(4000.0f, 500f);
-            commissionEmployee.applyBonus(4000.0f, 500f);
+            commissionEmployee.applyBonus(4000.0f, 1000f);
 
 
 
-            //Calculate ssalary again here 
 
-            //employee 2...
-
-           Console.WriteLine();
+            Console.WriteLine();
 
             Console.WriteLine("Employee Salaries(after bonus): ");
             Console.WriteLine($"Name: {regEmployee.name}, ID: {regEmployee.id}, Salary: {regEmployee.salary}");
@@ -61,85 +58,68 @@ namespace OOP_employee
 
     public class Employee
     {
-        
         public string name { get; set; }
         public int id { get; set; }
         public float salary { get; set; }
 
-        public Employee(string name, int id) { 
-        
+        public Employee(string name, int id)
+        {
             this.name = name;
             this.id = id;
             salary = 0;
-        
-        
         }
 
         public void applyBonus(float threshold, float bonus)
         {
             if (salary > threshold)
             {
-
-                salary += bonus;
-
+                salary += bonus; // Add bonus only if salary exceeds the threshold
             }
-
         }
-
-        
-
     }
 
     public class RegularEmployee : Employee
     {
         public const float fixedSalary = 3000;
-        public RegularEmployee(string name, int id) : base(name,id)
-        {
-        
-        
-        }
+        public RegularEmployee(string name, int id) : base(name, id) { }
 
         public void CalculateSalary()
         {
-            salary = fixedSalary;
+            salary = fixedSalary; // Regular employee gets a fixed salary
         }
     }
 
-
-    public class HourlyEmployee: Employee
+    public class HourlyEmployee : Employee
     {
         public float hoursWorked { get; set; }
-        public float hourlyRate {  get; set; }
-        public HourlyEmployee(string name, int id, float hoursWorked,float hourlyRate): base(name, id)
-        {
+        public float hourlyRate { get; set; }
 
+        public HourlyEmployee(string name, int id, float hoursWorked, float hourlyRate) : base(name, id)
+        {
             this.hoursWorked = hoursWorked;
             this.hourlyRate = hourlyRate;
         }
 
         public void CalculateSalary()
         {
-            salary = hoursWorked * hourlyRate;
+            salary = hoursWorked * hourlyRate; // Hourly employee's salary is hours worked * hourly rate
         }
     }
 
-    //commission employee
     public class CommissionEmployee : Employee
     {
         public float SalesAmount { get; set; }
         public float CommissionRate { get; set; }
 
-        public CommissionEmployee(string name, int id, float salesAmount,float commissionRate) : base(name, id)
+        public CommissionEmployee(string name, int id, float salesAmount, float commissionRate) : base(name, id)
         {
-            
             this.SalesAmount = salesAmount;
             this.CommissionRate = commissionRate;
-
         }
 
         public void CalculateSalary()
         {
-            salary = SalesAmount * CommissionRate;
+            salary = SalesAmount * CommissionRate; // Commission employee's salary is sales amount * commission rate
         }
     }
 }
