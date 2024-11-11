@@ -92,9 +92,9 @@ namespace OOP_employeeV2
 
     public class HourlyEmployee : Employee
     {
-        //adjusst modifier to private
-        public float _hoursWorked;
-        public float _hourlyRate;
+        
+        private float _hoursWorked;
+        private float _hourlyRate;
 
         public float HoursWorked
         {
@@ -122,9 +122,9 @@ namespace OOP_employeeV2
 
     public class CommissionEmployee : Employee
     {
-        //adjusst modifier to private
-        public float _salesAmount;
-        public float _commissionRate;
+        
+        private float _salesAmount;
+        private float _commissionRate;
 
         public float SalesAmount
         {
